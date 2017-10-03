@@ -18,3 +18,6 @@
         type = cat-file -t
         dump = cat-file -p
         df = diff --color
+        dw = diff --color --word-diff
+        dm = difftool -t meld
+        dy = difftool -t meld -y
