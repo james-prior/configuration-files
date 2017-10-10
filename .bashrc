@@ -20,7 +20,9 @@ export HISTCONTROL
 export HISTFILESIZE
 export HISTSIZE
 
-# PATH=${PATH}:${HOME}/bin
+# Appending $HOME/bin to PATH is redundant on some systems,
+# but not all, so do it anyway.
+PATH="${PATH}:${HOME}/bin"
 set -o vi
 alias ll='ls -l'
 alias lll='ls -l --full-time'
