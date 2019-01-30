@@ -1,0 +1,923 @@
+only deviations from defaults noted below
+English (up down to manually select)
+Install Ubuntu
+Preparing to install Ubuntu
+<checked> Download updates while installing (was unchecked)
+
+Installation type
+<check> Encrypt the new Ubuntu installation for security
+For more security: <check> Overwrite empty disk space
+
+Who are you?
+
+<restart>
+
+<Alt><F2>
+    xterm
+
+dpkg --get-selections >u16.04.3.0.initial
+sudo apt-get update
+sudo apt-get upgrade
+dpkg --get-selections >u16.04.3.1.update-upgrade
+sudo apt-get install synaptic
+unlocked Amazon icon from launcher
+unlocked LibreOffice Writer icon from launcher
+unlocked LibreOffice Calc icon from launcher
+unlocked LibreOffice Impress icon from launcher
+locked xterm icon to launcher
+### Ubuntu Software Center
+
+sudo apt-get install vim
+sudo apt-get install screen
+sudo apt-get install tmux
+sudo apt-get install xfce4
+apt-cache pkgnames | grep -i '^xfce4-.*-plugin' | grep -v power | grep -v xfce4-topmenu-plugin-dbg
+who@what:~$ apt-cache pkgnames | grep -i '^xfce4-.*-plugin' | grep -v power | grep -v xfce4-topmenu-plugin-dbg
+xfce4-pulseaudio-plugin
+xfce4-systemload-plugin
+xfce4-sensors-plugin
+xfce4-datetime-plugin
+xfce4-netload-plugin
+xfce4-timer-plugin
+xfce4-mailwatch-plugin
+xfce4-xkb-plugin
+xfce4-equake-plugin
+xfce4-cpugraph-plugin
+xfce4-whiskermenu-plugin
+xfce4-indicator-plugin
+xfce4-time-out-plugin
+xfce4-wmdock-plugin
+xfce4-messenger-plugin
+xfce4-smartbookmark-plugin
+xfce4-mount-plugin
+xfce4-topmenu-plugin
+xfce4-linelight-plugin
+xfce4-wavelan-plugin
+xfce4-eyes-plugin
+xfce4-battery-plugin
+xfce4-notes-plugin
+xfce4-genmon-plugin
+xfce4-quicklauncher-plugin
+xfce4-verve-plugin
+xfce4-cpufreq-plugin
+xfce4-weather-plugin
+xfce4-screenshooter-plugin
+xfce4-clipman-plugin
+xfce4-radio-plugin
+xfce4-places-plugin
+xfce4-diskperf-plugin
+xfce4-fsguard-plugin
+xfce4-mpc-plugin
+who@what:~$ 
+sudo apt-get install `apt-cache pkgnames | grep -i '^xfce4-.*-plugin' | grep -v power | grep -v xfce4-topmenu-plugin-dbg`
+
+dpkg --get-selections >u16.04.3.2.install
+
+who@what:~$ sudo fdisk -l /dev/sda
+who@what:~$ 
+who@what:~$ free
+who@what:~$ 
+
+who@what:~$ sudo blkid
+who@what:~$ 
+
+who@what:~$ free
+who@what:~$ 
+
+sudo dmidecode
+who@what:~$ sudo dmidecode
+
+who@what:~$ 
+
+###############################################################################
+
+log out
+select XFCE
+log in
+
+    <Use default config>
+
+mv -i .bashrc .bashrc.original
+
+    who@what:~$ diff .bashrc.original .bashrc
+    13c13,15
+    < HISTCONTROL=ignoreboth
+    ---
+    > #HISTCONTROL=ignoreboth
+    > HISTTIMEFORMAT='%F %T.%N '
+    > HISTTIMEFORMAT='%F %T '
+    19,20c21,22
+    < HISTSIZE=1000
+    < HISTFILESIZE=2000
+    ---
+    > HISTSIZE=400000
+    > HISTFILESIZE=400000
+    117a120,145
+    > 
+    > # HISTCONTROL=ignoredups:ignorespace
+    > unset HISTCONTROL
+    > HISTFILESIZE=400000
+    > HISTSIZE=400000
+    > export HISTCONTROL
+    > export HISTFILESIZE
+    > export HISTSIZE
+    > 
+    > PATH=${PATH}:${HOME}/bin
+    > # set -o vi
+    > alias ll='ls -l'
+    > alias lll='ls -l --full-time'
+    > export LINES
+    > export COLUMNS
+    > # EDITOR value is for git
+    > EDITOR=vim
+    > export EDITOR
+    > 
+    >
+    >
+    > 
+    > # modified by who to _append_ instead of prepend
+    > export PATH="$PATH:$HOME/miniconda/bin"
+    > 
+    > c
+    who@what:~$ 
+
+splice old .bash_history
+
+install .calendar/calendar
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+# install .vimrc
+
+    who@what:~$ cat .vimrc
+    let loaded_matchparen = 1
+    set background=dark
+    " Following does only one space for joining sentences with 'J' command.
+    set nojoinspaces
+    " :colorscheme mine
+    :hi Search term=reverse ctermfg=7 ctermbg=3
+    function! SearchWord(word)
+        let @/ = '\<' . a:word . '\>'
+        normal n
+    endfunction
+    command! -nargs=1 SearchWord call SearchWord(<f-args>)
+    nmap ? :SearchWord 
+
+    " the following is probably best for my Python stuff
+    " Note that it leaves existing tabs characters as is.
+    set expandtab           " enter spaces when tab is pressed
+    set softtabstop=4       " use 4 spaces to represent tab
+    set shiftwidth=4        " number of spaces to use for auto indent
+    set autoindent          " copy indent from current line when starting a new line
+    " turn off with :noai
+    " turn back on with :ai
+
+    " http://vim.wikia.com/wiki/How_to_turn_off_all_colors
+    " syntax off
+    set hlsearch
+    set t_Co=256
+    " set t_Co=0
+    set background=dark
+    who@what:~$ 
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+install .inputrc for editing python command line with vi commands
+
+    who@what:~$ cat .inputrc 
+    set editing-mode vi
+    who@what:~$ 
+
+###############################################################################
+
+right click on Clock applet in upper right corner --> Properties
+Clock Options
+    Format: Custom Format
+    %Y-%m-%d %H:%M (was %R)
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+sudo apt-get install openssh-server
+
+ssh-keygen -t rsa
+
+    who@what:~$ ssh-keygen -t rsa
+    Generating public/private rsa key pair.
+    Enter file in which to save the key (/home/who/.ssh/id_rsa): 
+    Created directory '/home/who/.ssh'.
+    Enter passphrase (empty for no passphrase): 
+    Enter same passphrase again: 
+    Your identification has been saved in /home/who/.ssh/id_rsa.
+    Your public key has been saved in /home/who/.ssh/id_rsa.pub.
+    The key fingerprint is:
+    The key's randomart image is:
+    +---[RSA 2048]----+
+    |                 |
+    |                 |
+    |                 |
+    |                 |
+    |   [redacted]    |
+    |                 |
+    |                 |
+    |                 |
+    |                 |
+    +----[SHA256]-----+
+    who@what:~$ 
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# Append contents of local .ssh/id_rsa.pub to remote .ssh/authorized_keys
+# chmod 600 .ssh/authorized_keys on remote computer
+# chown user.user .ssh/authorized_keys on remote computer
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+>>~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
+# Appended id_rsa.pub of main to ~/.ssh/authorized_keys.
+chmod 400 ~/.ssh/authorized_keys
+
+###############################################################################
+
+Unplug ethernet cable.
+### Setup Firefox
+<mouse icon> -> Internet -> Firefox Web Browser
+    <three line icon> -> Preferences
+    General
+        When Firefox Starts: Show a blank page (was Show my home page)
+        Home Page: file:///home/who/ (was about:startpage)
+        Downloads
+            Save files to /home/who (was Downloads)
+        Language
+            <uncheck> Check your spelling as you type (was checked)
+        Firefox Updates
+            <uncheck> Automatically update search engines (was checked)
+        Browsing
+            <uncheck> Use smooth scrolling (was checked)
+
+    Search
+        <select> Add search bar in toolbar
+        (was Use the address bar for search and navigation)
+
+        Default Search Engine DuckDuckGo (was Google)
+        <uncheck> Provide search suggestions (was checked)
+        One-click search engines
+            disabled the following search engines
+                Google
+                Yahoo
+                Bing
+                Amazon.com
+                Twitter
+
+    Privacy & Security
+        Permissions
+            Firefox Data Collection and Use
+            <uncheck> Allow Firefox to send technical and interaction data to
+            Mozilla (was checked0
+    <three line icon> -> Add-ons
+        Extensions
+    # could not: select Wikipedia as default search engine
+
+    plug in ethernet
+    <three line icon> -> Add-ons
+    Get Add-ons
+        Adblock Plus 3.0.2
+            <uncheck> Allow Acceptable Ads
+        Noscript Security Suite 2.9.5.2
+        Flashblock 1.5.20
+        Cookie Monster 1.3.4.8	
+        # did not install: Beef Taco 1.3.7
+    restart
+    Add-ons Manager -> Extensions
+        NoScript Preferences
+           Whitelist tab
+               Delete all web sites
+        Cookie Monster Preferences
+            <check> Block 3rd Party Cookies (was unchecked)
+            <check> Apply Cookie Settings to both HTTP and HTTPS (was unchecked)
+            <check> Display Cookie Monster Menu in Context Menu (was unchecked)
+            <check> Delete Temporary Cookies and Permissions When All tabs for
+            URL Close (was unchecked)
+            <check> Delete Cookies When Changing access to Deny (was unchecked)
+
+###############################################################################
+
+Create xterm icon beside mouse icon.
+
+    <right click on who in upper right corner> -> Panel -> Add New Items...
+    Launcher
+    <+ Add>
+    <close>
+
+    <right click on new icon in upper right corner> -> Properties
+    <+>
+    Search: xterm
+    <click on XTerm>
+    <+ Add>
+
+    <right click on new icon in upper right corner> -> Move
+    move icon to beside mouse icon.
+    <click>
+
+###############################################################################
+
+sudo apt-get install konqueror
+
+Added icon for konqueror beside xterm icon. 
+
+    <right click on who in upper right corner> -> Panel -> Add New Items...
+    Launcher
+    <+ Add>
+    <close>
+
+    <right click on new icon in upper right corner> -> Properties
+    <+>
+    Search: konqueror
+    <click on XTerm>
+    <+ Add>
+
+    <right click on new icon in upper right corner> -> Move
+    move icon to beside mouse icon.
+    <click>
+
+Configured Konqueror
+
+   Disconnected ethernet cable. 
+
+   Started konqueror by clicking on its icon. 
+   Settings -> Configure Konqueror...
+      General
+         When Konqeuror starts: Show My Bookmarks (was Show Introduction Page)
+         Home page: https://www.duckduckgo.com/html/ (was http://www.kde.org)
+      File Management
+         Trash
+            uncheck "Limit to maximum size"
+      Web Browsing
+         Appearance
+            General tab
+               Images
+                  Animations: Enabled (was Show Only Once)
+               Miscellaneous
+                  Smooth scrolling: Never (was When Efficient)
+         AdBlock Filters
+            Automatic Filter tab
+               check to enable EasyPrivacy+EasyList
+               check to enable Fanboy's List
+         Web Shortcuts
+            New...
+               Shortcut name: Duck Duck Go
+               Shortcut URL: https://duckduckgo.com/html/?q=\{@}
+               Shortcuts: d
+               Charset: UTF-8 (was Default)
+            check to enable that new entry
+            check to enable Merriam-Webster Dictionary
+            check to enable Merriam-Webster Thesaurus
+            uncheck to disable Google
+            uncheck to disable Yahoo
+            uncheck to disable Youtube
+         Cookies
+            Policy
+               uncheck Automatically accept session cookies
+               ### check Treat all cookies as session cookies
+            Default Policy
+               Ask for confirmation (was Accept all cookies)
+         Java & JavaScript
+            Java tab
+               uncheck Enable Java globally
+            JavaScript tab
+               uncheck Enable JavaScript globally
+
+###############################################################################
+
+# Hibernation per https://help.ubuntu.com/community/PowerManagement/Hibernate
+# first test to see if hibernation works. (save work before doing so)
+sudo pm-hibernate
+# It saved to hard drive,
+# then I turned computer back on, and it resumed perfectly
+# without showing grub menu
+
+https://help.ubuntu.com/community/PowerManagement/Hibernate
+
+this seemed to work just fine also:
+
+    sudo -s
+    echo shutdown > /sys/power/disk
+    echo disk > /sys/power/state
+
+    # this went through grub menu when resuming
+
+this seemed to work just fine also:
+
+    sudo -s
+    echo platform > /sys/power/disk
+    echo disk > /sys/power/state
+
+    # restored quickly, and without showing grub menu
+
+sudo su -
+cat >>/etc/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla <<EOF
+[Re-enable hibernate by default in upower]
+Identity=unix-user:*
+Action=org.freedesktop.upower.hibernate
+ResultActive=yes
+
+[Re-enable hibernate by default in logind]
+Identity=unix-user:*
+Action=org.freedesktop.login1.hibernate;org.freedesktop.login1.handle-hibernate-key;org.freedesktop.login1;org.freedesktop.login1.hibernate-multiple-sessions;org.freedesktop.login1.hibernate-ignore-inhibit
+ResultActive=yes
+EOF
+exit
+
+Right click on "who" in upper right corner.
+Click on Properties.
+<check> Hibernate (was unchecked)
+
+Left click on "who" in upper right corner.
+    click on "Hibernate".
+It hiberated and restored just fine.
+Restoration fine, but went through grub menu
+
+Did full shutdown, then cold boot.
+Left click on "who" in upper right corner.
+    click on "Hibernate".
+It hibernated and restored just fine.
+Since restoration was quick and skipped boot menu,
+probably is using "platform" hibernation.
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+###############################################################################
+
+<mouse icon> -> Settings -> Settings Manager
+Appearance
+Style tab
+    # (default was greybird)
+Icons tab
+    # (default was elementary Xfce dark)
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+<mouse icon> -> Settings -> Settings Manager
+Desktop
+    Background tab
+	Image (Folder was xfce) 
+            selected installation/background/x-herring-6x6-3-202020-000000.png
+        Style: Tiled (was Zoomed)
+        ###     Changed color to #080824 (_my_ classic dark blue) (from #152233)
+    Icons tab
+        Appearance
+            Icon type: None (was File/launcher icons)
+        Default Icons
+            <uncheck> Home (was checked)
+            <uncheck> Filesystem (was checked)
+            <uncheck> Trash (was checked)
+ 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+<mouse icon> -> Settings -> Settings Manager
+Panel
+Panel 2
+    click remove icon
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+<mouse icon> -> Settings -> Settings Manager
+Preferred Applications
+Internet tab
+    Web Browser
+        changed to Konqueror Web Browser (was Debian Sensible Browser)
+    Mail Reader
+        changed to /bin/false from Mozilla Thunderbird
+Utilities tab
+    Terminal Emulator
+        changed to X Terminal (was Debian X Terminal Emulator)
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+<mouse icon> -> Settings -> Settings Manager
+Screensaver
+Display Modes tab
+Mode: Blank Screen Only (was Random Screen Saver)
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+<mouse icon> -> Settings -> Settings Manager
+Window Manager
+    Advanced tab
+        Windows snapping
+            <check> To other windows: check (was unchecked)
+ 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+<mouse icon> -> Settings -> Settings Manager
+    Window Manager Tweaks
+        Accessibility tab
+            <uncheck> Automatically tile windows when moving toward the screen
+            edge (was checked)
+        Placement tab
+            Minimum size of windows to trigger smart placement:
+                <Large> (was about 20% from Small to Large)
+            By default, place windows:
+                <select> Under the mouse pointer
+                (was At the center of the screen)
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+<mouse icon> -> Settings -> Settings Manager
+Workspaces
+Number of workspaces: 4 (was 4)
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+<mouse icon> -> Settings -> Settings Manager
+Keyboard
+   Behavior tab
+      Typing Settings
+         Repeat delay: Change to 250 (from default of 500). 
+         Repeat speed: Change to 30 (from default of 20). 
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+<mouse icon> -> Settings -> Settings Manager
+Removable Drives and Media
+Storage tab
+    unchecked "Mount removable drives when hot-plugged". 
+        (was already unchecked)
+    unchecked "Mount removable media when inserted". 
+        (was already unchecked)
+    unchecked "Browse removable media when inserted". 
+        (was already unchecked)
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+<mouse icon> -> Settings -> Settings Manager
+Session and Startup
+    General tab
+        <check> Automatically save session on logout: (was unchecked)
+    Application Autostart tab
+        #20180215: unavailable: unchecked Blueman Applet
+        <uncheck> Indicator Bluetooth (was already unchecked)
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+cd
+mkdir ~/installation/original-cruft
+mv -i Desktop/ Documents/ Downloads/ Music/ ~/installation/original-cruft/
+mv -i Pictures/ Public/ Templates/ Videos/ ~/installation/original-cruft/
+mv -i examples.desktop ~/installation/original-cruft/
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Copied ~/bin from (old) casual.
+(Old 32-bit ELF binaries will not work on 64-bit ubuntu)
+
+###############################################################################
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+#20180215: did, but probably unnecessary for thinkpad x61: # trying to get wifi to work
+#20180215: did, but probably unnecessary for thinkpad x61: # per near bottom of http://askubuntu.com/questions/459654/drivers-for-broadcom-bcm43142-on-ubuntu-14-04-trusty-tahr
+#20180215: did, but probably unnecessary for thinkpad x61: # I was more lucky. After an update I lost my wifi connection. Via USB
+#20180215: did, but probably unnecessary for thinkpad x61: # threatening I just did your 8 step: sudo apt-get install bcmwl-kernel-source
+#20180215: did, but probably unnecessary for thinkpad x61: # --- and bump! It works without a need of a reboot. – Felipe Micaroni Lalli
+#20180215: did, but probably unnecessary for thinkpad x61: # Sep 30 '14 at 21:05 
+#20180215: did, but probably unnecessary for thinkpad x61: 
+#20180215: did, but probably unnecessary for thinkpad x61: sudo apt-get install bcmwl-kernel-source
+#20180215: did, but probably unnecessary for thinkpad x61: # This worked immediately!
+
+###############################################################################
+
+virtualization
+
+per https://help.ubuntu.com/lts/serverguide/libvirt.html
+
+cat /proc/cpuinfo | grep 'svm\|vmx' ;# shows that it has vmx (good!)
+sudo apt install qemu-kvm libvirt-bin
+sudo adduser $USER libvirtd
+The user `who' is already a member of `libvirtd'.
+sudo apt install virtinst
+sudo apt install virt-manager
+sudo apt install virt-viewer
+
+Add icon for Virtual Machine Manager, next to konqueror icon.
+
+seems to work after rebooting.
+
+Knoppix 7.7.1 DVD played 480p music video without dropouts.
+Audio was passed through.
+Knoppix 7.6.0 DVD played 320p music video without dropouts.
+Audio was passed through.
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+-------------------------------------------------------------------------------
+
+Added icon for thunar beside virtual machine manager icon. 
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+sudo apt-get install git
+install .gitconfig
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+# Created .tmux.conf to yield the following.
+who@what:~$ cat .tmux.conf 
+unbind C-b
+set -g prefix C-a
+# set-window-option status-fg white
+# set-option status-fg white
+# ^A^A toggles to last window
+bind-key C-a last-window
+setw -g aggressive-resize on
+who@what:~$ 
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+sudo apt-get install k3b
+
+k3b configuration
+k3b
+Settings -> Panels -> Folders uncheck
+Settings -> Panels -> Contents: uncheck
+Removed all button by right click -> Remove Button for each one of them
+right click "More actions..." -> Add Button -> "Format/erase rewritable disk..."
+right click "More actions..." -> Add Button -> "Burn Image..."
+Settings -> Configure K3b...
+    Misc
+        GUI Setting
+            Show splash screen: uncheck
+
+--------------------------------------------------------------------------------
+
+sudo apt-get update
+sudo apt-get upgrade
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+sudo apt-get install xsane
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+sudo apt-get install picocom
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+sudo apt-get install smartmontools
+
+sudo smartctl -a /dev/sda >smartl.sda.20180215
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+sudo apt-get install mercurial
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+sudo apt-get install vorbis-tools
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+sudo apt-get install python3-dev
+
+sudo apt-get install links
+sudo apt-get install lynx
+sudo apt-get install w3m
+
+sudo apt-get install screenkey
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+who@what:~$ cat /etc/papersize
+letter
+who@what:~$ 
+
+printer must be inaccessible (off or no network) while configuring for it
+<mouse icon> -> System -> Printers
+    Click on <+ Add> button. New window pops up. 
+        Devices
+            Select Device
+                Click on triangle to left of Network Printer
+                Click on AppSocket
+                    Host:
+            Choose Driver
+                Makes
+                Models
+                Drivers
+            Describe Printer
+                Printer Name
+                Description
+
+            Would you like to print a test page?
+                <Cancel>
+
+--------------------------------------------------------------------------------
+
+dpkg --get-selections >u16.04.3.3.before-software-updater
+<mouse icon> -> System -> Software Updater
+
+    -- Install Now (updates)
+    <Restart Now...>
+
+    (it installed stuff that apt-get update and apt-get upgrade did not)
+
+--------------------------------------------------------------------------------
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+right click on who icon --> Panel --> Add New Items ...
+click on CPU Graph
+click on Add
+right click on new CPU Graph thing, select Move
+Move it to right of workspaces.
+
+right click on new CPU Graph thing, select Properties
+Appearance tab
+    Background: #000000 (was #FFFFFF)
+    could not do: Color 3: #FFFFFF (was #0000FF)
+Advanced tab
+    # <check> Show current usage bars (was already checked)
+# vi /home/who/.config/xfce4/panel/cpugraph-29.rc
+# to edit Foreground3 from #00000000ffff to #ffffffffffff did not help.
+move to left of date and time
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+###############################################################################
+
+2018-02-27
+
+sudo apt-get install audacity
+
+git clone https://github.com/redacted/XKCD-password-generator.git
+
+# following command makes nice six word passwords
+# ~/XKCD-password-generator/xkcdpass/xkcd_password.py
+
+###############################################################################
+
+2018-03-25
+
+# created key to access colug (and also installed key on colug)
+
+    who@what:~$ ssh-keygen -t rsa
+    Generating public/private rsa key pair.
+    Enter file in which to save the key (/home/who/.ssh/id_rsa): /home/who/.ssh/colug-id_rsa
+    Enter passphrase (empty for no passphrase): 
+    Enter same passphrase again: 
+    Your identification has been saved in /home/who/.ssh/colug-id_rsa.
+    Your public key has been saved in /home/who/.ssh/colug-id_rsa.pub.
+    The key fingerprint is:
+    The key's randomart image is:
+    +---[RSA 2048]----+
+    |                 |
+    |                 |
+    |                 |
+    |                 |
+    |   [redacted]    |
+    |                 |
+    |                 |
+    |                 |
+    |                 |
+    +----[SHA256]-----+
+    who@what:~$ 
+
+    who@what:~$ cat .ssh/config
+    Host *
+        Protocol 2
+
+    Host github github.com
+        Hostname github.com
+        IdentityFile ~/.ssh/github-id_rsa
+        User james-prior
+
+    Host colug colug.net
+        Hostname colug.net
+        IdentityFile ~/.ssh/colug-id_rsa
+        User root
+
+    who@what:~$ 
+
+###############################################################################
+
+2018-03-30
+
+sudo apt-get install okular
+
+bash repo.continuum.io/archive/Anaconda3-5.1.0-Linux-x86_64.sh 
+
+###############################################################################
+
+2018-04-13
+
+sudo apt install vlc-nox
+
+###############################################################################
+
+###############################################################################
+
+2018-05-07
+
+sudo apt-get install wireshark
+
+###############################################################################
+
+2018-05-28
+
+sudo apt install unrar-free
+# unrar was not able to handle the .rar file that I had.
+sudo apt remove unrar-free
+
+sudo apt install unrar
+# this version worked
+
+###############################################################################
+
+2018-06-11
+
+sudo apt-get install mono-mcs
+
+end of 2018-06-11
+
+--------------------------------------------------------------------------------
+
+Added Indicator Plugin. (for networking control, got other controls)
+    move to left of workspaces
+    <right click on it> -> Properties
+        Known Indicators
+            <check> Hide indicators by default
+        Make sure that only the following Indicators are Visible
+        (one will not see changes until later)
+            Printers Menu
+            Application Indicators (is this what does networking?)
+            Application Menus (Global Menu)
+            Messaging Menu
+            Sound Menu
+            Session Management
+            Keyboard
+            
+--------------------------------------------------------------------------------
+
+### to see battery status from command line:
+sudo apt-get install acpi
+### then execute acpi command 
+### See http://www.garron.me/en/go2linux/laptop-battery-status-with-linux-console-command-acpi.html for usage.
+
+### From http://askubuntu.com/questions/69556/how-to-check-battery-status-using-terminal
+upower -e
+upower -i /org/freedesktop/UPower/devices/battery_BAT0
+
+/sys/class/power_supply/BAT0
+
+sudo apt-get install wireshark
+
+    Package configuration                                                           
+     ┌─────────────────────┤ Configuring wireshark-common ├──────────────────────┐  
+     │                                                                           │  
+     │ Dumpcap can be installed in a way that allows members of the "wireshark"  │  
+     │ system group to capture packets. This is recommended over the             │  
+     │ alternative of running Wireshark/Tshark directly as root, because less    │  
+     │ of the code will run with elevated privileges.                            │  
+     │                                                                           │  
+     │ For more detailed information please see                                  │  
+     │ /usr/share/doc/wireshark-common/README.Debian.                            │  
+     │                                                                           │  
+     │ Enabling this feature may be a security risk, so it is disabled by        │  
+     │ default. If in doubt, it is suggested to leave it disabled.               │  
+     │                                                                           │  
+     │ Should non-superusers be able to capture packets?                         │  
+     │                                                                           │  
+     │                    <Yes>                       <No>                       │  
+     │                                                                           │  
+     └───────────────────────────────────────────────────────────────────────────┘  
+
+    I chose no.
+
+sudo apt-get install inotify-tools
+sudo apt-get install units
+
+sudo apt-get install python3.5-venv
+
+sudo apt-get install meld
+
+sudo apt-get install python-markdown
+
+sudo apt-get install python3-tk ;# installed for circle2.py (python3)
+sudo apt-get install python-tk ;# installed for pydoc -g (python2)
+
+sudo apt-get install idle3
+
+sudo apt-get install indent
+
+sudo apt-get install tftp ;# for installing firmware of asus rt-ac87u ac2400
+
+###############################################################################
+
+get virtual machines working
+copied *.iso images from /var/lib/libvirt/images/*.iso
+copied *.xml files from /etc/libvirt/qemu/*.xml
+
+seems to have worked, although stuck with 32-bit CPUs
