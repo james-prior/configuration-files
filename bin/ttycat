@@ -1,0 +1,44 @@
+if [ $# -ge 1 ]; then
+   port="$1"
+else
+   echo "Usage: ${0##*/} device"
+   echo "where device is serial (RS-232/UART) port"
+   echo "E.g., ${0##*/} /dev/ttyS0"
+   echo
+   echo "stdin is copied to device"
+   echo "data received from device is copied to stdout"
+   exit 1
+fi
+
+# echo "port='$port'"
+
+stty --file="$port" -parenb cs8 -cstopb raw -crtscts 19200 -hupcl -onlcr -echo -echoe -echoctl -echok -echoke -echonl -echoprt -icanon -iexten -isig
+# stty --file="$port" -parenb cs8 -cstopb raw -crtscts 19200 -hupcl -onlcr -echo -echoe -echoctl -echok -echoke -echonl -echoprt -icanon -iexten -isig ixoff ixon
+
+exitvalue=1
+signalcaught=0
+trap 'signalcaught=1' 0 HUP INT QUIT TERM
+
+cat <$port &
+bpid=$!
+# echo "background pid is $! aka $bpid"
+
+handleSignal()
+{
+   # echo "will kill $bpid"
+   kill $bpid
+   exit $exitvalue
+}
+
+trap 'handleSignal' 0 HUP INT QUIT TERM
+if [ $signalcaught -ne 0 ]; then
+   # echo caught quick signal
+   trap : 0 HUP INT QUIT TERM ;# to avoid re-entrancy issues
+   handleSignal
+fi
+
+cat - >$port
+
+exitvalue=0
+exit 0
+
