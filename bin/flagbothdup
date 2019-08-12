@@ -1,0 +1,9 @@
+echo " :  Comparing files '$1' and '$2'"
+# md5sum "$1" "$2"
+if cmp -s "$1" "$2"; then
+   echo '*   identical'
+   mv "$1" "$1.duplicate"
+   mv "$2" "$2.duplicate"
+else
+   echo '  * different'
+fi
