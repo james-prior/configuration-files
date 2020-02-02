@@ -41,3 +41,4 @@ alias d='date --iso-8601=ns'
 alias gd='git difftool -t meld'
 alias gy='git difftool -t meld -y'
 umask '0277'
+umask 0027
