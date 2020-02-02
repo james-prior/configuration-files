@@ -1,0 +1,6 @@
+for file; do
+   #kghostview "$file" &
+   #kpdf "$file" &
+   #evince "$file" &
+   okular "$file" &
+done
