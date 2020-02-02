@@ -1,0 +1,6 @@
+#!/usr/bin/env python
+
+import os
+
+for i in range(int(os.environ['LINES'])):
+    print '@' * int(os.environ['COLUMNS'])
