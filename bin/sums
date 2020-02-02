@@ -1,0 +1,7 @@
+find . -type f -exec md5sum {} \; >../MD5SUM &
+find . -type f -exec sha1sum {} \; >../SHA1SUM &
+find . -type f -exec sha256sum {} \; >../SHA256SUM &
+find . -type f -exec sha512sum {} \; >../SHA512SUM &
+find . -print0 | xargs -0 ls -lad --full-time >../find.-ls &
+wait
+mv ../MD5SUM ../SHA1SUM ../SHA256SUM ../SHA512SUM ../find.-ls .
