@@ -40,5 +40,18 @@ alias c='cal | grep -v "^ *$";calendar -A 7'
 alias d='date --iso-8601=ns'
 alias gd='git difftool -t meld'
 alias gy='git difftool -t meld -y'
+
+alias fa='git fetch --all'
+alias gl='git lg'
+alias gl1='git lg -10 --all'
+alias gl2='git lg -20 --all'
+alias gl3='git lg -30 --all'
+alias gl4='git lg -40 --all'
+alias gl5='git lg -50 --all'
+alias gl6='git lg -60 --all'
+alias gl7='git lg -70 --all'
+alias gl8='git lg -80 --all'
+alias gll='git lg --all'
+
 umask 0277
 umask 0027
