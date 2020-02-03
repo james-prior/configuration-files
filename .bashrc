@@ -25,7 +25,10 @@ export HISTSIZE
 PATH="${PATH}:${HOME}/bin"
 set -o vi
 alias ll='ls -l'
+alias la='ls -la'
 alias lll='ls -l --full-time'
+alias ltr='ls -ltr'
+alias ltra='ls -ltra'
 export LINES
 export COLUMNS
 # EDITOR value is for git.
